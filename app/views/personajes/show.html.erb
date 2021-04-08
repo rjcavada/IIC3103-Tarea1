@@ -1,0 +1,67 @@
+<%if @response[0]%>
+<div class="columns">
+<div class="column">
+<div class="card has-background-grey-lighter">
+<div class="card-content">
+<div class="media">
+    <div class="media-left">
+    <figure class="image is-64x64">
+        <%= image_tag(@response[0]["img"])%>
+    </figure>
+    </div>
+    <div class="media-content">
+    <p class="title is-4"><%=@response[0]["name"]%></p>
+    <p class="subtitle is-6">ID: <%=@response[0]["char_id"]%>
+    <br>
+    Sobrenombre: <%=@response[0]["nickname"]%>
+    <br>
+    Estado: <%=@response[0]["status"]%>
+    </p>
+    </div>
+</div>
+
+<div class="content">
+    Roles: <%=@response[0]["occupation"].join(",")%>
+    <br>
+    Actor/Actriz: <%=@response[0]["portrayed"]%>
+    <br>
+    Series en las que aparece: <%=@response[0]["category"]%>
+    <br>
+    Temporadas de Breaking Bad en las que aparece:
+    <%if @response[0]["appearance"]!= []%>
+    <%@response[0]["appearance"].each do |temporada|%>
+    <%=link_to "Temporada "+ temporada.to_s, :controller => "temporadas", :action => "show", :info =>{:series => "Breaking Bad", :season => temporada}%>
+    <%end%>
+    <%else%>
+    No participa
+    <%end%>
+    <br>
+    Temporadas de Better Call Saul en las que aparece:
+    <%if @response[0]["better_call_saul_appearance"]!= []%>
+    <%@response[0]["better_call_saul_appearance"].each do |temporada|%>
+    <%=link_to "Temporada "+ temporada.to_s, :controller => "temporadas", :action => "show", :info =>{:series => "Better Call Saul", :season => temporada}%>
+    <%end%>
+    <%else%>
+    No participa
+    <%end%>
+    <br>
+    Frases:
+    <%if @quotes!= []%>
+    <ul class="menu-list">
+    <%@quotes.each do |quote|%>
+    <li><%=quote["quote"]%> (De la serie: <%=quote["series"]%>) </li>
+    <%end%>
+    <%else%>
+    No tiene
+    <%end%>
+</ul>
+    </div>
+</div>
+</div>
+</div>
+<div class="column">
+</div>
+</div>
+<%else%>
+Error en la consulta de la api
+<%end%>

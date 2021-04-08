@@ -1,0 +1,20 @@
+<%if @response[0] %>
+<div class="columns">
+<div class="column">
+<h2 class="menu-label ml-2 has-text-dark">
+Episodios Temporada <%=@season%> de <%=@series%> 
+</h2>
+<ul class="menu-list">
+<%@response.each do |episodio|%>
+<%if episodio["season"] == @season %>
+<li><%=link_to episodio["title"], episodio_path(episodio["episode_id"])%></li>
+<%end%>
+<%end%>
+</ul>
+</div>
+<div class="column"></div>
+</div>
+<%else%>
+Error en la consulta de la api
+<%end%>
+

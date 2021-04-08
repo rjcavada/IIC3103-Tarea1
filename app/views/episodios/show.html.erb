@@ -1,0 +1,24 @@
+<%if @response[0]  %>
+<div class="level-left">
+<div class="box has-background-grey-lighter">
+<div class="content">
+<div class="media-content">
+        <p>
+          <strong><%=@response[0]["title"]%></strong> <small>Temporada <%=@response[0]["season"]%></small> <small>Serie: <%=@response[0]["series"]%></small>
+        <div class="is-size-5">Id del episodio: <%=@response[0]["episode_id"]%></div>
+        <div class="is-size-5">Numero del episodio: <%=@response[0]["episode"]%></div>
+        <div class="is-size-5">Fecha de emisión: <%=Time.parse(@response[0]["air_date"])%></div>
+        <div class="is-size-5">Personajes:</div>
+        <ul class="menu-list">
+        <%@response[0]["characters"].each do |personaje|%>
+        <li><%=link_to personaje, personaje_path(@person[personaje])%></li>
+        <%end%>
+        </ul>
+        <p>
+</div>
+</div>
+</div>
+</div>
+<%else%>
+Error en la consulta a la api
+<%end%>

@@ -1,0 +1,20 @@
+<%if @response[0] %>
+<div class="columns">
+<%@series.keys.each do |titulo|%>
+<div class="column">
+<h2 class="menu-label ml-2">
+<%=titulo%></h2>
+<ul class="menu-list">
+<%@series[titulo].each do |temporada|%>
+<li><%=link_to "Temporada "+temporada, :controller => "temporadas", :action => "show", :info =>{:series => titulo, :season => temporada}%></li>
+<%end%>
+</ul>
+</div>
+<%end%>
+</div>
+<%else%>
+Error al consultar en la api
+<%end%>
+
+
+

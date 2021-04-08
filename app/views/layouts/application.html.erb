@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Breaking Bad App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+  <nav class="level">
+    <a href="/" class="level-item title mt-4">Breaking Bad App</a>
+    <div class="level-item">
+      <%= form_tag(search_page_path, :method => "get") do %>  
+            <%= search_field_tag :search, params[:search], placeholder: "Buscar Personaje", class: "input" %>  
+            <%= button_tag "Buscar", :class => 'button',:name => nil%>  
+        <% end %>
+    </div>
+    </nav>
+    <%= yield %>
+  </body>
+</html>
