@@ -1,3 +1,14 @@
-<%= form_tag(search_page_path, :method => "get") do %>    
-            <%= button_tag "Buscar", :class => 'button',:name => nil%>  
-        <% end %>
+<ul class="menu-list">
+<%@response.each do |personaje|%>
+        <li><%=link_to personaje["name"], personaje_path(personaje["char_id"])%></li>
+        <%end%>
+        </ul>
+<%if @vez.to_i >= 10%>
+<%=link_to "Atras", :controller => "pages", :action => "search", :info =>{:search => @parameter, :next => (@vez.to_i-10)}%>
+<%end%>
+<%if  !@vacio%>
+<%=link_to "Siguiente", :controller => "pages", :action => "search", :info =>{:search => @parameter, :next => (@vez.to_i+10)}%>
+<%end%>
+<%if @response == []%>
+No hay resultados
+<%end%>
